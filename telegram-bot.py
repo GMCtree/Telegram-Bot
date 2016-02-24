@@ -1,23 +1,26 @@
-# gets the needed API files and adds them to the PYTHONPATH
-import sys
-sys.path.append("/usr/local/lib/python2.7/dist-packages/telebot")
+from twx.botapi import TelegramBot, InputFile, InputFileInfo
 
-# import files from the newly added path
-import telebot
+bot = TelegramBot('165023625:AAGcL7UPoQQsuYU1wBdt9oF5TCMTnZ6YaQo') # create bot with the given authorization token
+bot.update_bot_info().wait() # setup bot
 
-# this bot's API token
-API_TOKEN = '165023625:AAGcL7UPoQQsuYU1wBdt9oF5TCMTnZ6YaQo'
+file = open('Pepe_rare.png', 'rb') # open the image file
+file_info = InputFileInfo('Pepe_rare.png', file, 'image/png') # instantiate needed file info for Telegram
+photo = InputFile('photo', file_info) # instantiate photo in Telegram's InputFile format
 
-bot = telebot.TeleBot(API_TOKEN)
+updates = bot.get_updates(1, None, None).wait() # get first update
+if len(updates) == 1 : # account for bot's first update
+	current = updates[0]
+else :
+	current = updates[len(updates) - 1]
 
-# Handle '/start' and '/help'
-@bot.message_handler(commands=['start', 'help'])
-def send_welcome(message):
-    bot.reply_to(message, "Hello, I am a bot that provides the dankest of memes");
+while True :
+	prev = current.update_id
+	updates = bot.get_updates(1, None, None).wait() # get next update
+	current = updates[len(updates) - 1]
+	if prev == current.update_id : # avoid redundant checks of the update
+		continue
+	cur_message = current.message # hold current Message object
+	if current.message.text == "Dank" :
+		bot.send_photo(cur_message.chat, photo)
+		
 
-# Handle all other messages with content_type 'text' (content_types defaults to ['text'])
-@bot.message_handler(func=lambda message: "dank")
-def echo_message(message):
-    bot.reply_to(message, message.text)
-
-bot.polling()
