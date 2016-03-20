@@ -68,6 +68,3 @@ try :
 except KeyboardInterrupt :
 	print "\nBot has stopped"
 
-# TODO:
-# 	-add more photos (or ability to grab a random photo
-#	-implement command list as dictionary (try to figure out why it is writing all contents of dictionary instead of only value mapped to key)
