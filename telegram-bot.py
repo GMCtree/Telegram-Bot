@@ -1,7 +1,7 @@
 from twx.botapi import TelegramBot, InputFile, InputFileInfo
 import re
 
-bot = TelegramBot('165023625:AAGcL7UPoQQsuYU1wBdt9oF5TCMTnZ6YaQo') # create bot with the given authorization token
+bot = TelegramBot("TOKEN GOES HERE") # create bot with the given authorization token
 bot.update_bot_info().wait() # setup bot
 
 file = open('Pepe_rare.png', 'rb') # open the image file
