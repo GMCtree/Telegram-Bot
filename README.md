@@ -4,12 +4,12 @@
 [Introduction](#intro)  
 [Usage](#use)
 
-
-## Introduction <a id = "intro"></a>
+<a id = "intro"></a>
+## Introduction
 This is a basic bot for the Telegram messaging app. This bot is wrtten in Python and is being developed with the [Telegram Bot API](https://core.telegram.org/bots/api) provided by [datamachine](https://github.com/datamachine/twx.botapi). The documentation for the API that I used is located [here](http://pythonhosted.org/twx.botapi/twx/botapi/botapi.html#)
 
-
-##Usage <a id = "use"></a>
+<a id = "use"></a>
+##Usage
 To use this bot, simply clone the repo and run telegram-bot.py like so
 <pre><code>
 	python telegram-bot.py
