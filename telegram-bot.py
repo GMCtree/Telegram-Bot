@@ -1,12 +1,19 @@
 from twx.botapi import TelegramBot, InputFile, InputFileInfo
 import re
 
-bot = TelegramBot("TOKEN GOES HERE") # create bot with the given authorization token
+token = str((open("token.txt", "r")).read()) # get API token
+
+bot = TelegramBot(token) # create bot with the given authorization token
 bot.update_bot_info().wait() # setup bot
 
 file = open('Pepe_rare.png', 'rb') # open the image file
 file_info = InputFileInfo('Pepe_rare.png', file, 'image/png') # instantiate needed file info for Telegram
 photo = InputFile('photo', file_info) # instantiate photo in Telegram's InputFile format
+
+def send_input_location(message) :
+	_, longitude, latitude = cur_message.text.split() # unpack array into variables for sending
+	bot.send_location(cur_message.chat, float(latitude), float(longitude))
+	print "Location sent"
 
 def send_help_text(message) :
 	bot.send_message(message.chat, "This is a basic telegram bot. This bot will send a photo if \"dank\" is in the message")
@@ -17,7 +24,7 @@ def send_about_text(message) :
 	print "About message sent"
 
 def send_author_info(message) :
-	bot.send_message(message.chat, "Created by: Andrea \"The Dank Memester\" Ciavaglia")
+	bot.send_message(message.chat, "Created by: GMCtree")
 	print "Author info sent"
 
 def send_meme(message) :
@@ -62,8 +69,7 @@ try :
 			command_response(cur_message)
 
 		if location_pattern.match(cur_message.text) :
-			_, longitude, latitude = cur_message.text.split() # unpack array into variables for sending
-			bot.send_location(cur_message.chat, float(latitude), float(longitude))
+			send_input_location(cur_message);
 
 except KeyboardInterrupt :
 	print "\nBot has stopped"
