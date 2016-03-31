@@ -15,6 +15,6 @@ To use this bot, simply clone the repo and run telegram-bot.py like so
 	python telegram-bot.py
 </code></pre>
 Here is a sample run of the bot on startup
-![Typical run of the bot](run-of-bot.png?raw=true "Typical Run")
+![Typical run of the bot](/photos/run-of-bot.png?raw=true "Typical Run")
 
 Of course, to fully implement the bot, you will need to make a [Telegram account](https://telegram.org/) so you are able to interact with the bot. Once this is done, you can test the bot yourself or add him to a group chat.

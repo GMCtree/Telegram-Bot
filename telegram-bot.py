@@ -6,8 +6,8 @@ token = str((open("token.txt", "r")).read()) # get API token
 bot = TelegramBot(token) # create bot with the given authorization token
 bot.update_bot_info().wait() # setup bot
 
-file = open('Pepe_rare.png', 'rb') # open the image file
-file_info = InputFileInfo('Pepe_rare.png', file, 'image/png') # instantiate needed file info for Telegram
+file = open('photos/Pepe_rare.png', 'rb') # open the image file
+file_info = InputFileInfo('photo/Pepe_rare.png', file, 'image/png') # instantiate needed file info for Telegram
 photo = InputFile('photo', file_info) # instantiate photo in Telegram's InputFile format
 
 def send_input_location(message) :
