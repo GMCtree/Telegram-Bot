@@ -40,9 +40,19 @@ def command_response(message) : # respond to commands typed by the user
 		commands[message.text](message)
 	else :
 		bot.send_message(message.chat, "That is not a command that this bot knows")
-	
+
+print "Bot running..."
 updates = bot.get_updates(1, None, None).wait() # get first update
-if len(updates) == 1 : # account for bot's first update
+
+
+'''
+	if bot has no updates, wait for an update. This is necessary if you put the bot into a 
+	chat with little activity.
+'''
+if len(updates) == 0 :
+	while len(updates) == 0 :
+		pass
+elif len(updates) == 1 : # account for bot's first update
 	current = updates[0]
 else :
 	current = updates[-1]
@@ -51,7 +61,6 @@ dank_pattern = re.compile('(\w\sdank\s\w)|(dank\s\w)|(\w\sdank)|(Dank)')
 command_pattern = re.compile('/\w')
 location_pattern = re.compile('(location -?\d\d -?\d\d)')
 
-print "Bot running..."
 try :
 	while True : # use long polling
 		prev = current.update_id
@@ -72,5 +81,5 @@ try :
 			send_input_location(cur_message);
 
 except KeyboardInterrupt :
-	print "\nBot has stopped"
+	print "\nExiting..."
 
