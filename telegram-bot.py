@@ -44,14 +44,8 @@ def command_response(message) : # respond to commands typed by the user
 print "Bot running..."
 updates = bot.get_updates(1, None, None).wait() # get first update
 
-
-'''
-	if bot has no updates, wait for an update. This is necessary if you put the bot into a 
-	chat with little activity.
-'''
 if len(updates) == 0 :
-	while len(updates) == 0 :
-		pass
+	print "There must be at least 1 message in the current chat"
 elif len(updates) == 1 : # account for bot's first update
 	current = updates[0]
 else :
