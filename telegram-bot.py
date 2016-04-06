@@ -1,14 +1,13 @@
-from twx.botapi import TelegramBot, InputFile, InputFileInfo
-import re
+from twx.botapi import TelegramBot
+from random import randint
+import re, setup_photos
 
 token = str((open("token.txt", "r")).read()) # get API token
 
 bot = TelegramBot(token) # create bot with the given authorization token
 bot.update_bot_info().wait() # setup bot
 
-file = open('photos/Pepe_rare.png', 'rb') # open the image file
-file_info = InputFileInfo('photo/Pepe_rare.png', file, 'image/png') # instantiate needed file info for Telegram
-photo = InputFile('photo', file_info) # instantiate photo in Telegram's InputFile format
+photos = setup_photos.setup() # defined in setup_photos module
 
 def send_input_location(message) :
 	_, longitude, latitude = cur_message.text.split() # unpack array into variables for sending
@@ -28,7 +27,7 @@ def send_author_info(message) :
 	print "Author info sent"
 
 def send_meme(message) :
-	bot.send_photo(message.chat, photo)
+	bot.send_photo(message.chat, photos[randint(0, (len(photos) - 1))])
 	print "Photo sent"
 
 def command_response(message) : # respond to commands typed by the user
